@@ -1,0 +1,52 @@
+// 存放一些公共样式
+a {
+    color: #333;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+* {
+    transition: all 150ms ease-in-out;
+}
+html, body ,#app{
+    //max-width: 650px;
+    margin: 0 auto;
+    height: 100%;
+}
+img {
+    /**
+     * 防止页面上的图片溢出。
+     * 注意，在 IE8 中如果 <img> 的父级元素加了 float，并且没有给 <img>
+     * 设置宽度的话，会出现图片不显示的 bug，解决方法是给这些图片设置
+     * 宽度或者设置 `max-width: none` 来覆盖 `max-width: 100%`
+    */
+    max-width: 100%;
+  }
+// 内容快
+.container {
+  width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.fl {
+    float: left;
+  }
+  
+  .fr {
+    float: right;
+  }
+
+// 清除浮动
+.clearfix:after {
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+}
+
+.clearfix {
+    zoom: 1;
+  }
