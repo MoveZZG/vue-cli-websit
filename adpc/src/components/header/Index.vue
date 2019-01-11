@@ -2,32 +2,34 @@
   <header>
     <div class="container clearfix">
       <h1 title="logo" class="logo">
-        <span>LOGO</span>
+        <a href="/index.html"><img src="@/assets/img/logo.png" alt="LOGO" srcset=""> </a>
       </h1>
-      <nav>
-        <ul>
-          <li>
-            <span>官网首页</span>
-          </li>
-          <li>
-            <span>关于我们</span>
-          </li>
-          <li>
-            <span>合作相关</span>
-          </li>
-          <li>
-            <span>公司动态</span>
-          </li>
-          <li>
-            <span>人才招聘</span>
-          </li>
-          <li>
-            <span>联系我们</span>
-          </li>
-        </ul>
-      </nav>
-      <div class="hd-phone">
-        <i>110-112-2222</i>
+      <div class="nav-content">
+        <nav>
+          <ul>
+            <li>
+              <span class="nav-item">官网首页</span>
+            </li>
+            <li>
+              <span class="nav-item">关于我们</span>
+            </li>
+            <li>
+              <span class="nav-item">合作相关</span>
+            </li>
+            <li>
+              <span class="nav-item">公司动态</span>
+            </li>
+            <li>
+              <span class="nav-item">人才招聘</span>
+            </li>
+            <li>
+              <span class="nav-item">联系我们</span>
+            </li>
+          </ul>
+        </nav>
+        <div class="hd-phone">
+          <i>110-112-2222</i>
+        </div>
       </div>
     </div>
   </header>
@@ -61,8 +63,8 @@ export default {
 @hdHeight: 60px;
 header {
   background: #fff;
-  color: #333;
   height: @hdHeight;
+  transition-duration: 0.8s;
   &.index-header {
     position: fixed;
     top: 0;
@@ -70,23 +72,20 @@ header {
     right: 0;
     z-index: 999;
   }
-  &.pg1 {
-    color: #fff;
-    background: transparent;
-  }
-  &.index {
-    transform: translateY(-@hdHeight);
-    // opacity: 0;
-    // overflow: hidden;
-  }
   .logo {
     width: 180px;
-    height: 100%;
     float: left;
     height: @hdHeight;
     line-height: @hdHeight;
+    img {
+      height: 100%;
+    }
+  }
+  .nav-content {
+    float: right;
   }
   nav {
+    color: #333;
     height: 100%;
     display: inline-block;
     margin-left: 50px;
@@ -118,6 +117,9 @@ header {
       &.active::after {
         transform: scaleX(1);
       }
+      .nav-item {
+        color: #333;
+      }
     }
   }
   .hd-phone {
@@ -131,6 +133,17 @@ header {
       border: solid 1px #ccc;
       padding: 9px 15px;
       border-radius: 20px;
+    }
+  }
+  &.pg1 {
+    padding: 10px 0;
+    background: transparent;
+    .nav-item {
+      color: #fff;
+    }
+    .hd-phone {
+      border-color: #fff;
+      color: #fff;
     }
   }
 }
