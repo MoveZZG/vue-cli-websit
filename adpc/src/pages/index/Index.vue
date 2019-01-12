@@ -1,41 +1,73 @@
 <template>
   <div id="app">
-    <Header class="index-header" :class="[firstPage ? `pg1` : `index` ]"/>
+    <Header class="index-header" active="index" :class="[firstPage ? `pg1` : `index` ]"/>
     <swiper :options="swiperOptionMain" ref="mySwiper">
-      <!-- slides -->
+      <!-- 楼层一 -->
       <swiper-slide class="page-1">
         <!-- bg-video -->
-          <video id="index-video" src="@/assets/img/index-video.mp4" autoplay loop muted poster url="@/assets/phonebg.png" ></video>
+        <video id="index-video" src="@/assets/media/index-video.mp4" autoplay loop muted poster url="@/assets/phonebg.png" ></video>
         <!-- slider-swiper -->
         <swiper :options="swiperOptionPgOne" ref="mySwiperPgOne">
           <swiper-slide class="page-1-1">
             <div class="panel">
-              <div class="word">
-                <p>世宇不凡</p> 
-              </div>
+                <p class="title">世宇不凡</p>
+                <p class="des">极致互动体验</p>
+                <p class="screen">TNT WITH NIMAB</p>
             </div>
           </swiper-slide>
           <swiper-slide class="page-1-2">
             <div class="panel">
-              <div class="word">
-                <p>撼天动地</p>
-              </div>
+                <p class="title">亿万交互</p>
+                <p class="des">精准市场投放</p>
             </div>
           </swiper-slide>
           <swiper-slide class="page-1-3">
             <div class="panel">
-              <div class="word">
-                <p>孤儿又成一人</p>
-              </div>
+              <p class="title">撼天动地</p>
+              <p class="des">孤儿又成一人</p>
             </div>
           </swiper-slide>
           <!-- Optional controls -->
           <div id="pagination-pg1" class="swiper-pagination" slot="pagination"></div>
         </swiper>
+        <div class="down" @click="sliderNext"></div>
       </swiper-slide>
-      <swiper-slide>
-        <div class="sw-wrap">
-          <img alt="Vue logo" src="@/assets/img/logo.png">
+      <swiper-slide class="page-2">
+        <canvas id="star"></canvas>
+        <div class="products container">
+          <div class="page-title">
+            <h3>专业的互动体验</h3>
+          </div>
+          <el-row :gutter="20" class="pro-content">
+            <el-col :md="6" :sm="12" :xs="24">
+              <dl>
+                <dt><img src="@/assets/img/Big_icon1.png" alt="" srcset=""></dt>
+                <dd class="title">我是描述</dd>
+                <dd class="des">听我给你说小鸭子的故事，这个故事讲的是很久很久以前有叫个小红帽的丑小鸭...发出了咕咕咕的声音（</dd>
+              </dl>
+            </el-col>
+            <el-col :md="6" :sm="12" :xs="24">
+              <dl>
+                <dt><img src="@/assets/img/Big_icon2.png" alt="" srcset=""></dt>
+                <dd class="title">我是描述</dd>
+                <dd class="des">听我给你说小鸭子的故事，这个故事讲的是很久很久以前有叫个小红帽的丑小鸭...发出了咕咕咕的声音（</dd>
+              </dl>
+            </el-col>
+            <el-col :md="6" :sm="12" :xs="24">
+              <dl>
+                <dt><img src="@/assets/img/Big_icon3.png" alt="" srcset=""></dt>
+                <dd class="title">我是描述</dd>
+                <dd class="des">听我给你说小鸭子的故事，这个故事讲的是很久很久以前有叫个小红帽的丑小鸭...发出了咕咕咕的声音（</dd>
+              </dl>
+            </el-col>
+            <el-col :md="6" :sm="12" :xs="24">
+              <dl>
+                <dt><img src="@/assets/img/Big_icon4.png" alt="" srcset=""></dt>
+                <dd class="title">我是描述</dd>
+                <dd class="des">听我给你说小鸭子的故事，这个故事讲的是很久很久以前有叫个小红帽的丑小鸭...发出了咕咕咕的声音（</dd>
+              </dl>
+            </el-col>
+          </el-row>     
         </div>
       </swiper-slide>
       <swiper-slide>
@@ -48,7 +80,8 @@
           <img alt="Vue logo" src="@/assets/img/logo.png">
         </div>
       </swiper-slide>
-      <swiper-slide>
+      <swiper-slide class="page-footer">
+        <div class="footer-content"></div>
         <Footer/>
       </swiper-slide>
       <!-- Optional controls -->
@@ -60,6 +93,7 @@
 <script>
 import Header from "@/components/header/Index.vue";
 import Footer from "@/components/footer/Index.vue";
+import canvas from "@/components/cosmos_canvas.js";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   components: {
@@ -97,7 +131,7 @@ export default {
       },
       swiperOptionPgOne: {
         autoplay: true,
-        speed: 400,
+        delay: 5000,
         loop: true,
         pagination: {
           el: "#pagination-pg1",
@@ -106,88 +140,19 @@ export default {
       }
     };
   },
-  computed: {},
+  methods: {
+    sliderNext() {
+      this.swiper.slideNext();
+    }
+  },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    }
+  },
   mounted() {
-    // this.mySwiper
+    // 绘制canvas
+    canvas("star", 228, 800, 40, 2, 800000, 0.5);
   }
 };
 </script>
-
-<style lang="less">
-.swiper-container {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  .swiper-pagination {
-    .swiper-pagination-bullet {
-      opacity: 0.2;
-    }
-    .swiper-pagination-bullet-active {
-      background: #fff;
-      opacity: 1;
-    }
-  }
-}
-// 第一页
-.page-1 {
-  .swiper-pagination {
-    .swiper-pagination-bullet {
-      width: 28px;
-      height: 10px;
-      display: inline-block;
-      background: #fff;
-      opacity: 0.2;
-      margin: 0 5px;
-      border-radius: 20px;
-      transition: opacity 0.5s, background-color 0.5s, width 0.5s;
-    }
-    .swiper-pagination-bullet-active {
-      opacity: 1;
-      background: #ffffff;
-      width: 150px;
-      transition-delay: 0s;
-    }
-  }
-  #index-video {
-    width: 100%;
-    position: absolute;
-  }
-  &::after {
-    content: " ";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    left: 0;
-    bottom: 0;
-  }
-  .panel {
-    width: 400px;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    margin-left: -200px;
-    text-align: center;
-    .word {
-      color: #fff;
-      font-size: 54px;
-      letter-spacing: 10px;
-      opacity: 0;
-    }
-  }
-  .swiper-slide-active {
-    .word {
-      animation: fadeInDown 0.8s linear 0.8s forwards;
-    }
-  }
-}
-.sw-wrap {
-  height: 100%;
-  text-align: center;
-  vertical-align: middle;
-  background: #000;
-  &.odd {
-    background: #ccc;
-  }
-}
-</style>

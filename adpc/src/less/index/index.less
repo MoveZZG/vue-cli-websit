@@ -1,0 +1,198 @@
+
+.swiper-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  .swiper-pagination {
+    .swiper-pagination-bullet {
+      opacity: 0.2;
+    }
+    .swiper-pagination-bullet-active {
+      background: #fff;
+      opacity: 1;
+    }
+  }
+}
+// 第一页
+.page-1 {
+  // 第一页swiper样式控制
+  .swiper-pagination {
+    .swiper-pagination-bullet {
+      width: 28px;
+      height: 10px;
+      display: inline-block;
+      background: #fff;
+      opacity: 0.2;
+      margin: 0 5px;
+      border-radius: 20px;
+      transition: opacity 0.5s, background-color 0.5s, width 0.5s;
+    }
+    .swiper-pagination-bullet-active {
+      opacity: 1;
+      background: #ffffff;
+      width: 150px;
+      transition-delay: 0s;
+    }
+  }
+  #pagination-pg1 {
+    bottom: 48px
+  }
+  #index-video {
+    width: 100%;
+    position: absolute;
+  }
+  &::after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    left: 0;
+    bottom: 0;
+  }
+  // swiper panel
+  .panel {
+    width: 700px;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-left: -350px;
+    text-align: center;
+    letter-spacing: 10px;
+    color: #fff;
+    font-size: 54px;
+    .title, .des {
+      padding: 10px 0;
+    }
+    .screen {
+      position: relative;
+      font-size: 32px;
+      letter-spacing: 15px;
+      &::before {
+        content: "";
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        position: absolute;
+        width: 50px;
+        left: 0;
+        top: 50%;
+        margin-top: -2px;
+        height: 4px;
+        background: #fff;
+      }
+      &::after{
+        content: "";
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        position: absolute;
+        width: 50px;
+        right: 0;
+        top: 50%;
+        margin-top: -2px;
+        height: 4px;
+        background: #fff;
+      }
+    }
+  }
+  // swiper active 
+  .swiper-slide-active {
+    .title {
+      opacity: 0;
+      animation: fadeInDown 0.8s linear 0.2s forwards;
+    }
+    .des {
+      opacity: 0;
+      animation: bounceIn 0.8s linear 0.8s forwards;
+    }
+  }
+  .down {
+    width: 35px;
+    height: 20px;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    margin-left: -17.5px;
+    border-radius: 10px;
+    background: url("../../assets/img/downb.png");
+    background-size: cover;
+    animation: slideInDown 1.2s linear infinite;
+    z-index: 99;
+  }
+}
+.page-2 {
+  position: relative;
+  #star {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  .page-title {
+    margin-bottom: 40px;
+    border-bottom: solid 1px #fff;
+    h3 {
+      color: #fff;
+      font-size: 36px;
+      line-height: 120px;
+      text-align: center;
+    }
+  }
+  .products {
+    position: relative;
+    z-index: 99;
+    padding-top: 60px;
+    .pro-content {
+      dl {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid #DEDEDE;
+        padding: 30px 36px 30px 36px;
+        text-align: center;
+        transition: 0.3s;
+        color: #fff;
+        box-sizing: border-box;
+        dt {
+          height: 60px;
+        }
+        dd.title {
+          font-size: 18px;
+          color: #939393;
+          line-height: 46px;
+          padding-top: 6px;
+        }
+        dd.des {
+          font-size: 16px;
+          color: #ababab;
+          line-height: 28px;
+        }
+      }
+      dl:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  &.swiper-slide-active {
+    h3 {
+      animation: fadeInDown 0.8s ease-out 0s forwards;
+    }
+    .pro-content dl {
+      animation: slideInUp .6s ease-in 0s forwards
+    }
+  }
+}
+.page-footer {
+  .footer-content {
+    height: 300px;
+    background: #8dd31c;
+  }
+}
+.sw-wrap {
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  background: #000;
+  &.odd {
+    background: #ccc;
+  }
+}

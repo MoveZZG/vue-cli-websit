@@ -7,23 +7,23 @@
       <div class="nav-content">
         <nav>
           <ul>
-            <li>
-              <span class="nav-item">官网首页</span>
+            <li :class="{active: active === 'index'}">
+              <span class="nav-item"> <a href="./index.html">官网首页</a></span>
             </li>
-            <li>
-              <span class="nav-item">关于我们</span>
+            <li :class="{active: active === 'about'}">
+              <span class="nav-item"> <a href="./about.html">关于我们</a></span>
             </li>
-            <li>
-              <span class="nav-item">合作相关</span>
+            <li :class="{active: active === 'cooperation'}">
+              <span class="nav-item"> <a href="./cooperation.html">合作相关</a></span>
             </li>
-            <li>
-              <span class="nav-item">公司动态</span>
+            <li :class="{active: active === 'dynamic'}">
+              <span class="nav-item"> <a href="./dynamic.html">公司动态</a></span>
             </li>
-            <li>
-              <span class="nav-item">人才招聘</span>
+            <li :class="{active: active === 'recruit'}">
+              <span class="nav-item"> <a href="./recruit.html">人才招聘</a></span>
             </li>
-            <li>
-              <span class="nav-item">联系我们</span>
+            <li :class="{active: active === 'contact'}">
+              <span class="nav-item"> <a href="./contact.html">联系我们</a></span>
             </li>
           </ul>
         </nav>
@@ -41,6 +41,9 @@ export default {
     FX: {
       type: Boolean,
       default: () => true
+    },
+    active: {
+      type: String
     }
   },
   data() {
@@ -48,11 +51,11 @@ export default {
       // des: "我是header"
     };
   },
-  // computed: {
-  //   nIndexHeader: () => {
-  //     return this.props.FX ? "index-header" : "";
-  //   }
-  // },
+  computed: {
+    nIndexHeader: () => {
+      return this.props.FX ? "index-header" : "";
+    }
+  },
   mounted() {
     // console.log(this.FX);
   }
@@ -71,6 +74,14 @@ header {
     left: 0;
     right: 0;
     z-index: 999;
+    background: rgba(255, 255, 255, 0.2);
+    nav li .nav-item a {
+      color: #fff;
+    }
+    .hd-phone {
+      border-color: #fff;
+      color: #fff;
+    }
   }
   .logo {
     width: 180px;
