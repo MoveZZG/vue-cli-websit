@@ -1,11 +1,16 @@
 <template>
   <div id="app">
+    <div class="pre-loading" :class="{loaded:preLoadingStauts}" ref="preLoading">
+      <p><img alt="Vue logo" src="@/assets/img/logo.png"></p>
+      <h1>Installed CLI Plugins</h1>
+      <el-progress type="circle" :stroke-width="18" :percentage="progress"></el-progress>
+    </div>
     <Header class="index-header" active="index" :class="[firstPage ? `pg1` : `index` ]"/>
     <swiper :options="swiperOptionMain" ref="mySwiper">
       <!-- 楼层一 -->
       <swiper-slide class="page-1">
         <!-- bg-video -->
-        <video id="index-video" src="@/assets/media/index-video.mp4" autoplay loop muted poster url="@/assets/phonebg.png" ></video>
+        <video id="index-video" src="@/assets/media/index-video.mp4" autoplay loop muted poster :url="imgs[0]"></video>
         <!-- slider-swiper -->
         <swiper :options="swiperOptionPgOne" ref="mySwiperPgOne">
           <swiper-slide class="page-1-1">
@@ -104,6 +109,17 @@ export default {
   },
   data() {
     return {
+      imgs: [
+        require('@/assets/img/logo.png'),
+        require("@/assets/img/phonebg.jpg"),
+        require("@/assets/img/Big_icon1.png"),
+        require("@/assets/img/Big_icon2.png"),
+        require("@/assets/img/Big_icon3.png"),
+        require("@/assets/img/Big_icon4.png")
+      ],
+      preLoadingStauts: false,
+      progress: 0, //进度条
+      time: "",
       firstPage: true,
       swiperOptionMain: {
         autoplay: false, //禁止自动滚动
@@ -148,9 +164,32 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
+    },
+    preLoader() {
+      return this.$refs.preLoading;
     }
   },
   mounted() {
+    let that = this;
+    let count = 0; //计算要加载的图片资源个数
+    for (let l = 0, imgs = this.imgs, length = imgs.length; l < length; l++)
+      ((src, callback) => {
+        console.log(l,imgs,length,src);
+        
+        var img = new Image();
+        // 如果资源走缓存跳过
+        if (((img.src = src), img.complete))
+          return count++, callback(), !1;
+        img.onload = function() {
+          count++, callback();
+        };
+      })(imgs[l], function() {
+        clearTimeout(that.time);
+        that.time = setTimeout(() => {
+          that.progress = ~~((count / length) * 100);
+          count === length && (that.preLoadingStauts = true)
+        }, 1000/60);
+      });
     // 绘制canvas
     canvas("star", 228, 800, 40, 2, 800000, 0.5);
   }

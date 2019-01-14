@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header active="about"/>
+    <Header active="cooperation"/>
     <div class="banner about">
       <div class="title active">
         <p>成功案例</p>

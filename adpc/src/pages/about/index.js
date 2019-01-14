@@ -1,6 +1,6 @@
 // index.js文件入口
-import "../../assets/css/animate.min.css";
-import "../../less/base.less";
+import "@/assets/style/animate.min.css";
+import "@/assets/style/base.less";
 import Vue from "vue";
 import Index from "./Index.vue";
 import ElementUI from "element-ui";
