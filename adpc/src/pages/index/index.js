@@ -5,6 +5,7 @@ import "swiper/dist/css/swiper.css";
 import "./index.less";
 import Vue from "vue";
 import Index from "./Index.vue";
+import "element-ui/lib/theme-chalk/index.css";
 import { Row, Col, Progress } from "element-ui";
 Vue.use(Row);
 Vue.use(Col);

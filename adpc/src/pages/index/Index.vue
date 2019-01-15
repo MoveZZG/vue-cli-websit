@@ -1,16 +1,16 @@
 <template>
-  <div id="app">
-    <div class="pre-loading" :class="{loaded:preLoadingStauts}" ref="preLoading">
+  <div id="app" :class="{loaded:preLoadingStauts}">
+    <div class="pre-loading" ref="preLoading">
       <p><img alt="Vue logo" src="@/assets/img/logo.png"></p>
       <h1>Installed CLI Plugins</h1>
-      <el-progress type="circle" :stroke-width="18" :percentage="progress"></el-progress>
+      <el-progress class="progress" type="circle" :width="40" :stroke-width="4" :show-text="false" :percentage="progress"></el-progress>
     </div>
     <Header class="index-header" active="index" :class="[firstPage ? `pg1` : `index` ]"/>
     <swiper :options="swiperOptionMain" ref="mySwiper">
       <!-- 楼层一 -->
       <swiper-slide class="page-1">
         <!-- bg-video -->
-        <video id="index-video" src="@/assets/media/index-video.mp4" autoplay loop muted poster :url="imgs[0]"></video>
+        <video id="index-video" src="@/assets/media/bgvideo.mp4" autoplay loop muted poster :url="imgs[0]"></video>
         <!-- slider-swiper -->
         <swiper :options="swiperOptionPgOne" ref="mySwiperPgOne">
           <swiper-slide class="page-1-1">
@@ -39,7 +39,23 @@
       </swiper-slide>
       <swiper-slide class="page-2">
         <canvas id="star"></canvas>
-        <div class="products container">
+        <div class="yuan-main">
+          <div class="yuan yuan-1">
+            <img src="@/assets/img/Big_icon1.png" alt="">
+          </div>
+          <div class="yuan yuan-2">
+            <img src="@/assets/img/Big_icon2.png" alt="">
+          </div>
+          <div class="yuan yuan-3">
+            <img src="@/assets/img/Big_icon3.png" alt="">
+          </div>
+          <div class="yuan yuan-4">
+            <img src="@/assets/img/Big_icon4.png" alt="">
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide class="page-3">
+         <div class="page-content container">
           <div class="page-title">
             <h3>专业的互动体验</h3>
           </div>
@@ -75,18 +91,15 @@
           </el-row>     
         </div>
       </swiper-slide>
-      <swiper-slide>
-        <div class="sw-wrap odd">
-          <img alt="Vue logo" src="@/assets/img/logo.png">
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="sw-wrap">
-          <img alt="Vue logo" src="@/assets/img/logo.png">
+      <swiper-slide class="page-4">
+        <div class="container page-content">
+          <div class="page-title">
+            <h3>最佳的实践案例</h3>
+          </div>
         </div>
       </swiper-slide>
       <swiper-slide class="page-footer">
-        <div class="footer-content"></div>
+        <div class="page-content"></div>
         <Footer/>
       </swiper-slide>
       <!-- Optional controls -->
@@ -100,6 +113,7 @@ import Header from "@/components/header/Index.vue";
 import Footer from "@/components/footer/Index.vue";
 import canvas from "@/components/cosmos_canvas.js";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+// import { TweenMax } from "gsap";
 export default {
   components: {
     Header,
@@ -110,7 +124,8 @@ export default {
   data() {
     return {
       imgs: [
-        require('@/assets/img/logo.png'),
+        require("@/assets/img/bgvideo.jpg"),
+        require("@/assets/img/logo.png"),
         require("@/assets/img/phonebg.jpg"),
         require("@/assets/img/Big_icon1.png"),
         require("@/assets/img/Big_icon2.png"),
@@ -119,7 +134,6 @@ export default {
       ],
       preLoadingStauts: false,
       progress: 0, //进度条
-      time: "",
       firstPage: true,
       swiperOptionMain: {
         autoplay: false, //禁止自动滚动
@@ -174,21 +188,18 @@ export default {
     let count = 0; //计算要加载的图片资源个数
     for (let l = 0, imgs = this.imgs, length = imgs.length; l < length; l++)
       ((src, callback) => {
-        console.log(l,imgs,length,src);
-        
         var img = new Image();
         // 如果资源走缓存跳过
-        if (((img.src = src), img.complete))
-          return count++, callback(), !1;
+        if (((img.src = src), img.complete)) return count++, callback(), !1;
         img.onload = function() {
           count++, callback();
         };
       })(imgs[l], function() {
-        clearTimeout(that.time);
-        that.time = setTimeout(() => {
-          that.progress = ~~((count / length) * 100);
-          count === length && (that.preLoadingStauts = true)
-        }, 1000/60);
+        that.progress = ~~((count / length) * 100);
+        count === length &&
+          setTimeout(() => {
+            that.preLoadingStauts = true;
+          }, 0);
       });
     // 绘制canvas
     canvas("star", 228, 800, 40, 2, 800000, 0.5);

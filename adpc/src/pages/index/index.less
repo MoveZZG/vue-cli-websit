@@ -14,8 +14,20 @@
     margin: 40px 0;
     font-size: 40px;
   }
+  .progress {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    margin-left: -20px;
+  }
 }
-
+// loaded
+.loaded {
+  .pre-loading {
+    animation: slideOutUp 0.4s ease-out 0.4s forwards;
+  }
+  animation: slideInUp 0.4s ease-out 0.4s forwards;
+}
 // swiepr公共样式
 .swiper-container {
   height: 100%;
@@ -23,11 +35,32 @@
   overflow: hidden;
   .swiper-pagination {
     .swiper-pagination-bullet {
-      opacity: 0.2;
+      opacity: 0.8;
+      background: #fff;
     }
     .swiper-pagination-bullet-active {
-      background: #fff;
+      background-image: url(../../assets/img/case2.jpg);
+      background-size: contain;
+      animation: rotateIn 0.4s ease-in ;
+      transform: scale(1.5);
       opacity: 1;
+    }
+  }
+}
+// page-conetent公共样式
+.page-content {
+  position: relative;
+  z-index: 99;
+  padding-top: 60px;
+  // page title 样式
+  .page-title {
+    margin-bottom: 40px;
+    border-bottom: solid 1px #fff;
+    h3 {
+      color: #fff;
+      font-size: 36px;
+      line-height: 70px;
+      text-align: center;
     }
   }
 }
@@ -36,19 +69,21 @@
   // 第一页swiper样式控制
   .swiper-pagination {
     .swiper-pagination-bullet {
-      width: 28px;
+      width: 20px;
       height: 10px;
       display: inline-block;
       background: #fff;
       opacity: 0.2;
-      margin: 0 5px;
+      margin: 0 2.5px;
       border-radius: 20px;
       transition: opacity 0.5s, background-color 0.5s, width 0.5s;
     }
     .swiper-pagination-bullet-active {
       opacity: 1;
       background: #ffffff;
-      width: 150px;
+      transform: none;
+      animation-name: none;
+      width: 120px;
       transition-delay: 0s;
     }
   }
@@ -56,8 +91,8 @@
     bottom: 48px
   }
   #index-video {
-    width: auto;
-    height: 100%;
+    min-height: 100%;
+    min-width: 100%;
     position: absolute;
   }
   &::after {
@@ -117,7 +152,7 @@
   .swiper-slide-active {
     .title {
       opacity: 0;
-      animation: fadeInDown 0.8s linear 0.2s forwards;
+      animation: fadeIn 0.8s linear 0.2s forwards;
     }
     .des {
       opacity: 0;
@@ -138,6 +173,7 @@
     z-index: 99;
   }
 }
+// 第二页
 .page-2 {
   position: relative;
   #star {
@@ -147,48 +183,45 @@
     height: 100%;
     width: 100%;
   }
-  .page-title {
-    margin-bottom: 40px;
-    border-bottom: solid 1px #fff;
+  &.swiper-slide-active {
     h3 {
-      color: #fff;
-      font-size: 36px;
-      line-height: 120px;
-      text-align: center;
+      animation: fadeInDown 0.8s ease-out 0s forwards;
     }
   }
-  .products {
-    position: relative;
-    z-index: 99;
-    padding-top: 60px;
-    .pro-content {
-      dl {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.2);
-        border: 1px solid #DEDEDE;
-        padding: 30px 36px 30px 36px;
-        text-align: center;
-        transition: 0.3s;
-        color: #fff;
-        box-sizing: border-box;
-        dt {
-          height: 60px;
-        }
-        dd.title {
-          font-size: 18px;
-          color: #939393;
-          line-height: 46px;
-          padding-top: 6px;
-        }
-        dd.des {
-          font-size: 16px;
-          color: #ababab;
-          line-height: 28px;
-        }
+}
+// 第三页
+.page-3 {
+  background: url(../../assets/img/bg.jpg) no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  overflow: hidden;
+  .pro-content {
+    dl {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid #DEDEDE;
+      padding: 30px 36px 30px 36px;
+      text-align: center;
+      transition: 0.3s;
+      color: #fff;
+      box-sizing: border-box;
+      dt {
+        height: 60px;
       }
-      dl:last-child {
-        margin-right: 0;
+      dd.title {
+        font-size: 18px;
+        color: #939393;
+        line-height: 46px;
+        padding-top: 6px;
       }
+      dd.des {
+        font-size: 16px;
+        color: #ababab;
+        line-height: 28px;
+      }
+    }
+    dl:last-child {
+      margin-right: 0;
     }
   }
   &.swiper-slide-active {
@@ -200,10 +233,22 @@
     }
   }
 }
+// 第四页
+.page-4 {
+  background: url(../../assets/img/bg2.jpg) no-repeat;
+  background-size: cover;
+  &.swiper-slide-active {
+    h3 {
+      animation: fadeInDown 0.8s ease-out 0s forwards;
+    }
+  }
+}
 .page-footer {
-  .footer-content {
-    height: 300px;
-    background: #8dd31c;
+  .page-content {
+    color: #fff;
+    height: 50%;
+    background: url(../../assets/img/bg.jpg) no-repeat;
+    background-size: cover;
   }
 }
 .sw-wrap {
@@ -213,5 +258,47 @@
   background: #000;
   &.odd {
     background: #ccc;
+  }
+}
+
+//page-2 星河 单独css
+
+.yuan-main {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -250px 0 0 -250px;
+  transform-style: preserve-3d;
+  // transform: rotateX(80deg) rotateY(-10deg);
+  .yuan {
+    position: absolute;
+    transform-origin: 250px 250px;
+    // transform: rotateX(-80deg) rotateY(10deg);
+    animation: rotate 18s linear infinite reverse;
+    img {
+      animation: rotate 18s linear infinite;
+    }
+  }
+  .yuan-1 {
+    left: 40px;
+    top: 40px;
+    transform-origin: 210px 210px;
+  }
+  .yuan-2 {
+    left: 80px;
+    top: 80px;
+    transform-origin: 170px 170px;
+  }
+  .yuan-3 {
+    left: 150px;
+    top: 150px;
+    transform-origin: 100px 100px;
+  }
+}
+@keyframes rotate {
+  to {
+    transform: rotate(1return)
   }
 }
