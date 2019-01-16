@@ -39,20 +39,7 @@
       </swiper-slide>
       <swiper-slide class="page-2">
         <canvas id="star"></canvas>
-        <div class="yuan-main">
-          <div class="yuan yuan-1">
-            <img src="@/assets/img/Big_icon1.png" alt="">
-          </div>
-          <div class="yuan yuan-2">
-            <img src="@/assets/img/Big_icon2.png" alt="">
-          </div>
-          <div class="yuan yuan-3">
-            <img src="@/assets/img/Big_icon3.png" alt="">
-          </div>
-          <div class="yuan yuan-4">
-            <img src="@/assets/img/Big_icon4.png" alt="">
-          </div>
-        </div>
+        <per-album :imgs="pagImgs2"></per-album>
       </swiper-slide>
       <swiper-slide class="page-3">
          <div class="page-content container">
@@ -111,13 +98,14 @@
 <script>
 import Header from "@/components/header/Index.vue";
 import Footer from "@/components/footer/Index.vue";
+import PerAlbum from "@/components/common/PerAlbum.vue";
 import canvas from "@/components/cosmos_canvas.js";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-// import { TweenMax } from "gsap";
 export default {
   components: {
     Header,
     Footer,
+    PerAlbum,
     swiper,
     swiperSlide
   },
@@ -125,12 +113,16 @@ export default {
     return {
       imgs: [
         require("@/assets/img/bgvideo.jpg"),
-        require("@/assets/img/logo.png"),
-        require("@/assets/img/phonebg.jpg"),
-        require("@/assets/img/Big_icon1.png"),
-        require("@/assets/img/Big_icon2.png"),
-        require("@/assets/img/Big_icon3.png"),
-        require("@/assets/img/Big_icon4.png")
+        require("@/assets/img/logo.png")
+      ],
+      pagImgs2: [
+        require("@/assets/img/Product_img1.jpg"),
+        require("@/assets/img/Product_img2.jpg"),
+        require("@/assets/img/Product_img3.jpg"),
+        require("@/assets/img/Product_img1.jpg"),
+        require("@/assets/img/Product_img2.jpg"),
+        require("@/assets/img/Product_img3.jpg"),
+        require("@/assets/img/Product_img4.jpg")
       ],
       preLoadingStauts: false,
       progress: 0, //进度条

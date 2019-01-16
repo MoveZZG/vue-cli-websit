@@ -24,9 +24,9 @@
 // loaded
 .loaded {
   .pre-loading {
-    animation: slideOutUp 0.4s ease-out 0.4s forwards;
+    animation: fadeOutUp 0.4s ease-out 0.4s forwards;
   }
-  animation: slideInUp 0.4s ease-out 0.4s forwards;
+  animation: fadeInUp 0.4s ease-out 0.4s forwards;
 }
 // swiepr公共样式
 .swiper-container {
@@ -183,6 +183,9 @@
     height: 100%;
     width: 100%;
   }
+  #perspective {
+    padding-top: 140px;
+  }
   &.swiper-slide-active {
     h3 {
       animation: fadeInDown 0.8s ease-out 0s forwards;
@@ -271,34 +274,51 @@
   top: 50%;
   margin: -250px 0 0 -250px;
   transform-style: preserve-3d;
-  // transform: rotateX(80deg) rotateY(-10deg);
+  // transform: rotateX(-10deg) rotateY(10deg);
+  // animation: rotateYuan 5s linear infinite;
   .yuan {
     position: absolute;
-    transform-origin: 250px 250px;
-    // transform: rotateX(-80deg) rotateY(10deg);
-    animation: rotate 18s linear infinite reverse;
-    img {
-      animation: rotate 18s linear infinite;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    margin: -40px 0 0 -40px;
+    .yuan-content {
+      width: 100%;
+      height: 100%;
     }
-  }
-  .yuan-1 {
-    left: 40px;
-    top: 40px;
-    transform-origin: 210px 210px;
-  }
-  .yuan-2 {
-    left: 80px;
-    top: 80px;
-    transform-origin: 170px 170px;
-  }
-  .yuan-3 {
-    left: 150px;
-    top: 150px;
-    transform-origin: 100px 100px;
+    &.yuan-1 {
+      transform: rotateY(0deg) translateZ(240px);
+      .yuan-content {
+        background: rgb(158, 97, 73);
+      }
+    }
+    &.yuan-2 {
+      transform: rotateY(90deg) translateZ(240px);
+      .yuan-content {
+        transform: rotateY(90deg);
+        background: rgba(150, 163, 32, 0.774);
+      }
+    }
+    &.yuan-3 {
+      transform: rotateY(180deg) translateZ(240px);
+      .yuan-content {
+        background: rgb(111, 101, 245);
+      }
+    }
+    &.yuan-4 {
+      transform: rotateY(270deg) translateZ(240px);
+      .yuan-content {
+        transform: rotateY(90deg);
+        background: rgb(245, 47, 57);
+      }
+    }
+    
   }
 }
-@keyframes rotate {
+@keyframes rotateYuan {
   to {
-    transform: rotate(1return)
+    transform: rotateY(360deg)
   }
 }

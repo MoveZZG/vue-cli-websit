@@ -158,9 +158,9 @@ header {
     }
   }
 }
-@media screen and (min-width: 992px){
-    header nav {
-        margin-left: 0px;
-    }
+@media screen and (min-width: 992px) {
+  header nav {
+    margin-left: 0px;
+  }
 }
 </style>
