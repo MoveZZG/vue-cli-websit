@@ -39,7 +39,7 @@
       </swiper-slide>
       <swiper-slide class="page-2">
         <canvas id="star"></canvas>
-        <per-album :imgs="pagImgs2"></per-album>
+        <per-album :imgs="pagImgs2" ref="perAlbum"></per-album>
       </swiper-slide>
       <swiper-slide class="page-3">
          <div class="page-content container">
@@ -140,8 +140,15 @@ export default {
         on: {
           slideChangeTransitionStart: () => {
             let swiper = this.$refs.mySwiper.swiper;
+            let activeIndex = swiper.activeIndex; //当前访问的活动单元
+            let previousIndex = swiper.previousIndex;//上一个访问活动单元
+            activeIndex === 0 && (this.firstPage = true);
+            previousIndex === 1 && (this.perAlbum.wrapExit());//触发组件渲染
+          },
+          slideChangeTransitionEnd: () => {
+            let swiper = this.$refs.mySwiper.swiper;
             let activeIndex = swiper.activeIndex;
-            this.firstPage = activeIndex === 0;
+            activeIndex === 1 && (this.perAlbum.wrapEnter());
           }
         }
         // breakpoints: {
@@ -170,6 +177,9 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
+    },
+    perAlbum() {
+       return this.$refs.perAlbum;
     },
     preLoader() {
       return this.$refs.preLoading;

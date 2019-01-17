@@ -33,12 +33,22 @@ module.exports = {
       //title 模板文件的标题
       title: "合作相关",
       chunks: ["chunk-vendors", "chunk-common", "cooperation"]
+    },
+    test: {
+      //文件入口
+      entry: "src/pages/test/index.js",
+      //文件模板
+      template: "public/index.html",
+      filename: "test.html",
+      //title 模板文件的标题
+      title: "合作相关",
+      chunks: ["chunk-vendors", "chunk-common", "test"]
     }
   },
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
-        $: "jQuery",
+        $: "jquery",
         jQuery: "jquery",
         "window.jQuery": "jquery"
       })
