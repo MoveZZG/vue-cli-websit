@@ -65,23 +65,27 @@ export default {
 <style scoped lang="less">
 @hdHeight: 60px;
 header {
-  background: #fff;
+  background: #000;
   height: @hdHeight;
   transition-duration: 0.8s;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+    transition: all 0.2s ease-in 0.3s;
+  }
   &.index-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 999;
-    background: rgba(255, 255, 255, 0.2);
-    nav li .nav-item a {
-      color: #fff;
-    }
-    .hd-phone {
-      border-color: #fff;
-      color: #fff;
-    }
+    // background: rgba(255, 255, 255, 0.2);
+
   }
   .logo {
     width: 180px;
@@ -94,12 +98,13 @@ header {
   }
   .nav-content {
     float: right;
+    font-size: 0.05rem;
   }
   nav {
     color: #333;
     height: 100%;
     display: inline-block;
-    margin-left: 50px;
+    // margin-left: 50px;
     li {
       font-size: 16px;
       padding: 21px 15px;
@@ -128,8 +133,8 @@ header {
       &.active::after {
         transform: scaleX(1);
       }
-      .nav-item {
-        color: #333;
+      .nav-item a{
+        color: #fff;
       }
     }
   }
@@ -144,16 +149,24 @@ header {
       border: solid 1px #ccc;
       padding: 9px 15px;
       border-radius: 20px;
+      color: #fff;
     }
   }
   &.pg1 {
+    &::after{
+      transform: scaleX(0);
+    }
     padding: 10px 0;
     background: transparent;
-    .nav-item {
+    
+    .nav-item a {
       color: #fff;
     }
     .hd-phone {
       border-color: #fff;
+      color: #fff;
+    }
+    li:hover {
       color: #fff;
     }
   }

@@ -1,17 +1,31 @@
 // 存放一些公共样式
 a {
     color: #333;
+    font-size: 0.23rem;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
 }
 
-* {
-    transition: all 150ms ease-in-out;
+h3 {
+    font-size: 0.4rem;
+    line-height: 1rem;
 }
+h4 {
+    font-size: 0.36rem;
+    line-height: 0.83rem;
+}
+
+// * {
+//     transition: all 150ms ease-in-out;
+// }
 html, body ,#app{
     //max-width: 650px;
     margin: 0 auto;
     height: 100%;
+    font-size: 60px;
+}
+.text-xs-center {
+    text-align: center;
 }
 img {
     /**
@@ -79,7 +93,10 @@ img {
     100%{transform: translateY(-20px);}
 }
 
-@media screen and (min-width: 992px){
+@media screen and (max-width: 992px){
+    html {
+        font-size: 40px;
+    }
     .container {
         width: 970px;
     }

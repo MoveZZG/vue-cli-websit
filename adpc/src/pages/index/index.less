@@ -1,3 +1,5 @@
+@easeOut: cubic-bezier(0.02, 0.5, 0.5, 0.99);
+
 // pre-loading
 .pre-loading{
   position: fixed;
@@ -22,17 +24,20 @@
   }
 }
 // loaded
-.loaded {
-  .pre-loading {
-    animation: fadeOutUp 0.4s ease-out 0.4s forwards;
-  }
-  animation: fadeInUp 0.4s ease-out 0.4s forwards;
-}
+// .loaded {
+//   .pre-loading {
+//     animation: fadeOutUp 0.4s @easeOut 0.4s forwards;
+//   }
+//   animation: fadeInUp 0.4s @easeOut 0.4s forwards;
+// }
 // swiepr公共样式
 .swiper-container {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  .swiper-slide {
+    overflow: hidden;
+  }
   .swiper-pagination {
     .swiper-pagination-bullet {
       opacity: 0.8;
@@ -41,7 +46,7 @@
     .swiper-pagination-bullet-active {
       background-image: url(../../assets/img/case2.jpg);
       background-size: contain;
-      animation: rotateIn 0.4s ease-in ;
+      animation: rotateIn 0.4s @easeOut ;
       transform: scale(1.5);
       opacity: 1;
     }
@@ -52,16 +57,37 @@
   position: relative;
   z-index: 99;
   padding-top: 60px;
+  box-sizing: border-box;
+  height: 100%;
   // page title 样式
   .page-title {
-    margin-bottom: 40px;
-    border-bottom: solid 1px #fff;
+    margin-bottom: 20px;
+    position: relative;
+    // border-bottom: solid 1px #fff;
+    &::after {
+      content: "";
+      position: absolute;
+      background: #fff;
+      width: 120px;
+      height: 1px;
+      bottom: 0;
+      left: 50%;
+      margin-left: -60px;
+      transition: all 0.2s @easeOut 0.4s;
+      transform: scaleX(0);
+    }
     h3 {
-      color: #fff;
-      font-size: 36px;
-      line-height: 70px;
+      color: #ff842f;
+      // font-size: 25px;
+      // line-height: 70px;
+      // margin-top: 20px;
       text-align: center;
     }
+  }
+}
+.swiper-slide-active {
+  .page-title::after  {
+    transform: scaleX(1);
   }
 }
 // 第一页
@@ -183,76 +209,312 @@
     height: 100%;
     width: 100%;
   }
-  #perspective {
-    padding-top: 300px;
+  .left {
+    background: url(../../assets/img/banner1.jpg) no-repeat;
+    background-size: cover;
+    height: 100%;
+    img {
+      height: 100%;
+    }
+  }
+  .right {
+    color: #fff;
+    padding: 70px 0;
+    .title {
+      color: #ff842f;
+      height: 60px;
+      font-size: 24px;
+      // transform: translateY(30px);
+      // transition: all 0.2s @easeOut 0.3s;
+      position: relative;
+      padding: 0 70px;
+      .line {
+        display: inline-block;
+        position: absolute;
+        bottom: 0px;
+        left: 70px;
+        width: 100px;
+        height: 1px;
+        background: #ff842f;
+      }
+    }
+    .desc {
+      margin-top: 20px;
+      text-align: justify;
+      line-height: 2;
+      font-size: 14px; 
+      max-height: 500px;
+      overflow: hidden;
+      padding: 0 70px;
+    }
+    .more {
+      margin-top: 50px;
+      margin: 50px 70px 0;
+      border: 1px solid #fff;
+      color: #ffffff;
+      overflow: hidden;
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      width: 160px;
+      // transition: all 0.2s @easeOut 0.3s;
+      // transform: translateY(30px);
+      span {
+        display: block;
+        width: 100%;
+        position: relative;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        transition: all 0.2s @easeOut;
+        &::after {
+          content: attr(data-title);
+          background: #ff842f;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left:0;
+          transform: translateY(100%);
+        }
+      }
+    }
+    .more:hover {
+      span {
+        transform: translateY(-100%);
+      }
+    }
   }
   &.swiper-slide-active {
-    h3 {
-      animation: fadeInDown 0.8s ease-out 0s forwards;
+    .right{
+       .title {
+        // transform: translateY(0px);
+        animation: fadeInUp 0.8s @easeOut 0s forwards;
+
+       }
+       .desc {
+        animation: fadeInUp 0.8s @easeOut 0s forwards;
+       }
+       .more {
+        // transform: translateY(0px);
+        animation: fadeInUp 0.8s @easeOut 0s forwards;
+       }
+    }
+  }
+}
+@media screen and (max-width: 992px){
+  .page-2 {
+    .left,.right {
+      height: 50%;
+    }
+    .right {
+      .desc {
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .more {
+        margin-top: 20px;
+      }
     }
   }
 }
 // 第三页
 .page-3 {
-  background: url(../../assets/img/bg.jpg) no-repeat;
-  background-size: cover;
+  background: url(../../assets/img/offerbg.jpg);
+  // background-size: cover;
   overflow: hidden;
-  overflow: hidden;
-  .pro-content {
-    dl {
+  .case-content{
+    height: auto;
+  }
+  li {
+    // width: 25%;
+    // height: auto;
+    // display: inline-block;
+    transition: all 0.4s @easeOut;
+    transform: translateY(100%);
+  }
+  figure {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow: hidden;
+    vertical-align: middle;
+    img {
       width: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid #DEDEDE;
-      padding: 30px 36px 30px 36px;
-      text-align: center;
-      transition: 0.3s;
+      object-fit: cover;
+      transition: all 0.8s @easeOut;
+    }
+    figcaption {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
       color: #fff;
+      padding: 20px;
       box-sizing: border-box;
-      dt {
-        height: 60px;
-      }
-      dd.title {
-        font-size: 18px;
-        color: #939393;
-        line-height: 46px;
-        padding-top: 6px;
-      }
-      dd.des {
-        font-size: 16px;
-        color: #ababab;
-        line-height: 28px;
+      opacity: 0;
+      background: rgba(0,0,0,0.5);
+      transition: all 0.8s @easeOut;
+      p {
+        font-size: 14px;
+        line-height: 22px;
+        text-align: justify;
       }
     }
-    dl:last-child {
-      margin-right: 0;
+    &:hover {
+      img {
+        transform: scale(1.5);
+      }
+      figcaption {
+        opacity: 1;
+      }
     }
   }
   &.swiper-slide-active {
     h3 {
-      animation: fadeInDown 0.8s ease-out 0s forwards;
+      animation: fadeInDown 0.8s @easeOut 0s forwards;
     }
-    .pro-content dl {
-      animation: slideInUp .6s ease-in 0s forwards
+    .swiper-slide{
+      .loopLiImg(16);
+      transform: translateY(0);
     }
   }
+}
+.loopLiImg(@n, @i:1) when (@i <= @n){
+  &:nth-child(@{i}){
+    transition-delay: @i*0.07s;
+  }
+  .loopLiImg(@n,(@i+1));
 }
 // 第四页
 .page-4 {
-  background: url(../../assets/img/bg2.jpg) no-repeat;
-  background-size: cover;
+  // background: url(../../assets/img/bg2.jpg) no-repeat;
+  // background-size: cover;
+  .page-content {
+    .page-title{
+      &::after {
+        background: #333;
+      }
+    }
+  }
+  .pro-content {
+    // margin-top: 50px;
+    .swiper-slide {
+      padding: 10px;
+      overflow: hidden;
+    }
+    dl {
+      width: 100%;
+      min-height: 400px;
+      // background: rgba(255, 255, 255, 0.2);
+      // border: 1px solid #DEDEDE;
+      // padding: 30px 36px 30px 36px;
+      text-align: center;
+      transition: 0.3s;
+      color: #333;
+      box-sizing: border-box;
+      box-shadow: rgba(0, 0, 0, 0.5) 0 0 12px 0px;
+      transform: translateY(100%);
+      transition:all 1s ;
+      dt {
+        overflow: hidden;
+        // height: 60px;
+        img {
+          width: 100%;
+          transition: transform 2s @easeOut;
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+      }
+      dd {
+        .title {
+          font-size: 18px;
+          // color: #fff;
+          line-height: 46px;
+          padding-top: 6px;
+        }
+        .des {
+          font-size: 16px;
+          // color: #333;
+          line-height: 28px;
+        }
+      }
+    }
+  }
   &.swiper-slide-active {
     h3 {
-      animation: fadeInDown 0.8s ease-out 0s forwards;
+      animation: fadeInDown 0.8s @easeOut 0s forwards;
+    }
+    .pro-content
+      .swiper-slide{
+        .loopDLImg(4);
+        dl {
+          // animation: slideInUp 0.4s @easeOut forwards;
+          // opacity: 1;
+          transform: translateY(0);
+        }
+      }
+  }
+}
+.loopDLImg(@n, @i:1) when (@i <= @n){
+  &:nth-child(@{i}) dl{
+    transition-delay: @i*0.1s;
+  }
+  .loopDLImg(@n,(@i+1));
+}
+
+.page-footer {
+  padding-top: 60px;
+  position: relative;
+  font-size: 14px;
+  .contact-cont {
+    position: absolute;
+    bottom: 0;
+    z-index: 8;
+    right: 0;
+    background: transparent;
+    border-bottom: 950px solid;
+    border-color: #000000;
+    border-left: 350px solid transparent;
+    border-right: 0px solid transparent;
+    width: 45%;
+    transform: translateX(100%);
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1) 300ms;
+    transition-duration: 1.2s;
+  }
+  .contact-text {
+    position: absolute;
+    top: 50%;
+    z-index: 9;
+    width: 25%;
+    text-align: right;
+    right: 80px;
+    transform: translateY(-50%);
+    color: #fff;
+    .line {
+      display: inline-block;
+      position: absolute;
+      bottom: 0px;
+      left: 70px;
+      width: 100px;
+      height: 1px;
+      background: #ff842f;
+    }
+  }
+  &.swiper-slide-active {
+    .contact-cont {
+      transform: translateX(50%);
     }
   }
 }
-.page-footer {
-  .page-content {
-    color: #fff;
-    height: 50%;
-    background: url(../../assets/img/bg.jpg) no-repeat;
-    background-size: cover;
-  }
+// 拖拽相册
+#perspective {
+  padding-top: 90px;
 }
 .sw-wrap {
   height: 100%;
@@ -261,60 +523,6 @@
   background: #000;
   &.odd {
     background: #ccc;
-  }
-}
-
-//page-2 星河 单独css
-
-.yuan-main {
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: -250px 0 0 -250px;
-  transform-style: preserve-3d;
-  // transform: rotateX(-10deg) rotateY(10deg);
-  // animation: rotateYuan 5s linear infinite;
-  .yuan {
-    position: absolute;
-    height: 80px;
-    width: 80px;
-    border-radius: 50%;
-    left: 50%;
-    top: 50%;
-    margin: -40px 0 0 -40px;
-    .yuan-content {
-      width: 100%;
-      height: 100%;
-    }
-    &.yuan-1 {
-      transform: rotateY(0deg) translateZ(240px);
-      .yuan-content {
-        background: rgb(158, 97, 73);
-      }
-    }
-    &.yuan-2 {
-      transform: rotateY(90deg) translateZ(240px);
-      .yuan-content {
-        transform: rotateY(90deg);
-        background: rgba(150, 163, 32, 0.774);
-      }
-    }
-    &.yuan-3 {
-      transform: rotateY(180deg) translateZ(240px);
-      .yuan-content {
-        background: rgb(111, 101, 245);
-      }
-    }
-    &.yuan-4 {
-      transform: rotateY(270deg) translateZ(240px);
-      .yuan-content {
-        transform: rotateY(90deg);
-        background: rgb(245, 47, 57);
-      }
-    }
-    
   }
 }
 @keyframes rotateYuan {

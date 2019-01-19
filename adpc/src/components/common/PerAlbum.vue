@@ -2,8 +2,10 @@
   <div id="perspective" @mousedown="startDrag" @mouseup="stopDrag">
     <div id="wrap" ref="perImg" :style="rolStyle">
       <img v-for="(item, index) in imgs" :src="item" alt="展示" :key="index">
+      <p></p>
+      <span>{{text}}</span>
+      <span class="backface">{{text}}</span>
     </div>
-    <p></p>
   </div>
 </template>
 
@@ -17,14 +19,17 @@ export default {
     },
     boxStyle: {
       type: Object
+    },
+    text: {
+      type: String
     }
   },
   data() {
     return {
       initialMouseX: 0,
       initialMouseY: 0,
-      roY: 0,
-      roX: 0,
+      roY: 30,
+      roX: -20,
       timer: "",
       minuseX: 0,
       minuseY: 0
@@ -40,7 +45,7 @@ export default {
       return { imgs: oImgs, length: length, deg: 360 / length };
     },
     rolStyle() {
-      return { transform: `rotateX(${this.roX}deg)rotateY(${this.roY}deg)` };
+      return { transform: `rotateX(-20deg)rotateY(${this.roY}deg)` };
     }
   },
   methods: {
@@ -65,7 +70,7 @@ export default {
         }
         this.roY += mx * 0.2;
         this.roX -= my * 0.1;
-        this.roX = this.roX <= 0? Math.max(this.roX, -roXMax) : Math.min(this.roX, roXMax);
+        this.roX = this.roX <= 0? Math.max(this.roX, -roXMax) : Math.min(this.roX, roXMax-10);
         this.minuseX = mx;
         this.minuseY = my;
       }, 13);
@@ -139,13 +144,28 @@ export default {
       transform: rotateY(0deg) translateZ(0px);
       // /*倒影:朝向 偏移  遮盖  *//*线性渐变(从哪里开始) 开始时候的颜色  结束时候的颜色*/
       -webkit-box-reflect: below 5px
-        linear-gradient(top, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.5) 100%);
+        -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.5) 100%);
+    }
+    span {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      color: #ff842f;
+      font-size: 30px;
+      font-weight: 700;
+      backface-visibility: hidden;
+      -webkit-box-reflect: below 5px
+      -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%);
+    
+    }
+    .backface {
+      transform: rotateY(180deg);
     }
     p {
       width: 1200px;
       height: 1200px;
       /*径向渐变 (从哪里开始) 扩散程度 开始时候的颜色  结束时候的颜色*/
-      background: radial-gradient(
+      background: -webkit-radial-gradient(
         center center,
         600px 600px,
         rgba(244, 23, 134, 0.2),
